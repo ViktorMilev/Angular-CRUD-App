@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+.bi::before, [class^="bi-"]::before, [class*=" bi-"]::before {
+    font-weight: bolder !important;
+}
+
+col-sm-12.btn-group.show .dropdown-menu .dropdown-item:hover {
+    color: whitesmoke !important;
+    background: #bf5279 !important;
+}

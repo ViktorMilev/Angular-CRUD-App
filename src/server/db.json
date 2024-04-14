@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "firstName": "Асен",
+      "lastName": "Йорданов",
+      "occupation": "Главен счетоводител",
+      "gender": "Мъж",
+      "birthDate": "2000-04-02"
+    },
+    {
+      "id": "2",
+      "firstName": "Румен",
+      "lastName": "Стоянов",
+      "occupation": "Банкер",
+      "gender": "Мъж",
+      "birthDate": "1992-05-10"
+    },
+    {
+      "id": "3",
+      "firstName": "Валентина",
+      "lastName": "Ясенова",
+      "occupation": "Интериорен дизайнер",
+      "gender": "Жена",
+      "birthDate": "2002-11-06"
+    },
+    {
+      "id": "4",
+      "firstName": "Габриела",
+      "lastName": "Тодорова",
+      "occupation": "Главен асистент",
+      "gender": "Жена",
+      "birthDate": "1986-07-02"
+    },
+    {
+      "id": 7,
+      "firstName": "Румен",
+      "lastName": "Стоянов",
+      "occupation": "Банкер",
+      "gender": "Мъж",
+      "birthDate": "1992-05-10"
+    }
+  ]
+}
