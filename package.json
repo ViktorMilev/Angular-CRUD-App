@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "server": "json-server src/server/db.json",
-    "server:all": "concurrently \"npm run server\" \"ng serve -o\"",
+    "app": "concurrently \"npm run server\" \"ng serve -o\"",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

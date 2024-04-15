@@ -42,7 +42,9 @@ export class HomePageComponent implements OnInit {
   deleteUser(user: any) {
     this.userService.deleteUser(user).subscribe(response => {
       console.log("Deleted", user);
-    })
+    });
+
+    this.getUsersData();
   };
  
   formatDate(params: string) {

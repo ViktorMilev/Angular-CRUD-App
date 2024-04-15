@@ -1,5 +1,5 @@
 .dropdown-item.hover, .dropdown-item:hover {
-    color: #24244B;
+    color: #4E367C;
     background-color: #E6E6F9;
     font-size: 17px;
     transition: all .3s ease-in-out;
@@ -8,4 +8,5 @@
 .dropdown-item.active, .dropdown-item:active {
     color: white;
     background-color: #6969DB;
+    transition: all .3s ease-in-out;
 }

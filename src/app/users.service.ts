@@ -36,6 +36,6 @@ export class UserService {
     // Изтриване на потребител
     deleteUser(id: number): Observable<any> {
         console.log(`${this.getUrl}?id=${id}`);
-        return this.http.delete(`${this.getUrl}?id=${id}`);
+        return this.http.delete(`${this.getUrl}/${id}`);
     }
 }
