@@ -1,13 +1,14 @@
 import { Routes } from '@angular/router';
-import { NavbarComponent } from './navbar/navbar.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AddUserComponent } from './add-user/add-user.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { EditUserIDComponent } from './edit-user-id/edit-user-id.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 export const routes: Routes = [
-    { path: "", component: HomePageComponent, pathMatch: "full"},
-    { path: "add-user", component: AddUserComponent },
-    { path: "edit-user/:id", component: EditUserComponent },
-    { path: "**", component: NotFoundComponent }
+    { path: "", title: 'Angular CRUD App', component: HomePageComponent, pathMatch: "full" },
+    { path: "add-user", title: 'Добавяне на потребител', component: AddUserComponent },
+    { path: "edit-user", title: 'Редактиране на потребители', component: EditUserComponent },
+    { path: "edit-user/:id", title: 'Редактиране на потребител', component: EditUserIDComponent },
+    { path: "**", title: 'Страницата не беше намерена', component: NotFoundComponent },
 ];

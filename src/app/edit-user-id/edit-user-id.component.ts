@@ -1,11 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../users.service';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
 import moment from 'moment';
 import { Subscription, interval } from 'rxjs';
+import { Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { FileUploadComponent } from '../file-upload/file-upload.component';
 
 interface User {
@@ -19,21 +22,24 @@ interface User {
 }
 
 @Component({
-    selector: 'app-adduser',
-    standalone: true,
-    imports: [CommonModule, NgbToastModule, HttpClientModule, FormsModule, FileUploadComponent],
-    templateUrl: './add-user.component.html',
-    styleUrl: './add-user.component.scss',
-    styles: ['.container.mx-auto { height: 100vh; padding: 10px; }']    
+  selector: 'app-edituser-id',
+  standalone: true,
+  imports: [CommonModule, NgbToastModule, HttpClientModule, FormsModule, RouterModule, FileUploadComponent],
+  templateUrl: './edit-user-id.component.html',
+  styleUrl: './edit-user-id.component.scss',
+  styles: ['.container.mx-auto { height: 100vh; padding: 10px; }']
 })
 
-export class AddUserComponent {  
+export class EditUserIDComponent implements OnInit {
   subscription: Subscription;
   show: boolean = false;
   firstDate: any = new Date();
   mins: number = 0;
   errorMsg: string = "";
   
+  userID: number = 0;
+  urlPath: string = "";
+
   user: User = {
     id: "",
     firstName: "",
@@ -43,6 +49,12 @@ export class AddUserComponent {
     birthDate: "",
     profilePicture: ""
   };
+
+  getUserById(id: number) {
+    this.userService.getUserById(id).subscribe(response => {
+      this.user = response[0];
+    })
+  }
 
   users: User[] = [];
   lastUser: any = [];
@@ -90,7 +102,7 @@ export class AddUserComponent {
     }
 
     if (firstNameLowercase === null) {
-      this.setErrorMsg("Първото име трябва да е с главна буква!");  
+      this.setErrorMsg("Първото име трябва да е с главна буква!");
       this.firstDate = new Date();
       this.show = true;
     } else if (lastNameLowercase === null) {
@@ -98,14 +110,10 @@ export class AddUserComponent {
       this.firstDate = new Date();
       this.show = true;
     } else {
-      this.lastUser = this.users.slice(-1);
-      this.newID = String(+this.lastUser[0].id + 1);
-      newUser.id = this.newID;
-  
-      this.userService.addUser(newUser).subscribe((user) => {
+      this.userService.editItem(this.userID, newUser).subscribe((user) => {
       });
 
-      this.getUsers();
+      this.Router.navigate(['/']);
     }
   }
 
@@ -140,20 +148,23 @@ export class AddUserComponent {
   }
 
   alertError() {
-    return '*Не трябва да е празно!';
+    return '*Не трябва да е празно!'
   }
 
   addItem(newItem: string) {
     this.user.profilePicture = newItem;
   }
 
-  constructor(public userService:UserService) {
+  constructor(public userService: UserService, private router: ActivatedRoute, private Router: Router) {
     const source = interval(1000);
     this.subscription = source.subscribe(val => this.calculatePassedTime());
     this.show = false;
   }
 
   ngOnInit(): void {
+    this.userID = +this.router.snapshot.params['id'];
+    this.urlPath = String(this.router.snapshot.routeConfig?.path);
+    this.getUserById(this.userID);
     this.getUsers();
   }
 }

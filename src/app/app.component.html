@@ -1,32 +1,11 @@
 <main class="main">
   <a class="text-decoration-none" style="color: black" routerLink="" rel="noopener noreferrer">
-    <h1 class="text-center fs-2" style="font-weight: 300">{{title1}}<span style="font-weight: 400">CRUD</span>
+    <h1 class="logo text-center fs-2" style="font-weight: 300">{{title1}}<span style="font-weight: 400">CRUD</span>
       {{title2}}</h1>
   </a>
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000080">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="" class="nav-link active" aria-current="page"
-              rel="noopener noreferrer">Начало</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/add-user" rel="noopener noreferrer">Добави</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/edit-user" rel="noopener noreferrer">Редактирай</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <app-navbar></app-navbar>
   <div class="content">
+    <router-outlet />
   </div>
 </main>
-<router-outlet />
-<app-footer></app-footer>
+<app-footer *ngIf="!urlPath.includes('/edit-user')"></app-footer>

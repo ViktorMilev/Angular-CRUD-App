@@ -1,3 +1,9 @@
+.form-group.row > *.img-placeholder {
+    width: 150px;
+    height: 200px;
+    border-radius: 2px;
+}
+
 .bi::before, [class^="bi-"]::before, [class*=" bi-"]::before {
     font-weight: bolder !important;
 }
@@ -6,3 +12,32 @@ col-sm-12.btn-group.show .dropdown-menu .dropdown-item:hover {
     color: whitesmoke !important;
     background: #bf5279 !important;
 }
+
+ngb-pagination  .page-link {
+    color: #45458F !important;
+}
+
+ngb-pagination .page-link.active,
+.active>.page-link {
+    color: #FFFFFF !important;
+    background-color: #5555B1 !important;
+    border-color: #45458F !important;
+}
+
+.btn.btn-primary {
+    background-color: #34346D;
+    border-color: #24244B;
+
+    &:hover {
+        background-color: #45458F;
+        border-color: #24244B;
+    }
+}
+
+.btn.btn:disabled {
+    background-color: #5555B1;
+    border-color: #34346D;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';

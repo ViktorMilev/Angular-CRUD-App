@@ -1,35 +1,60 @@
-<div class="container mx-auto">
-    <h3 class="mb-4 mt-3" style="font-weight: 600">Списък с добавени потребители</h3>
-    <div class="row">
-        <div class="col-sm d-flex justify-content-center align-items-center border text-center text-light fw-bold border-dark"
-            style="background-color: #34346D">Първо име</div>
-        <div class="col-sm d-flex justify-content-center align-items-center border text-center text-light fw-bold border-dark"
-            style="background-color: #34346D">Фамилия</div>
-        <div class="col-sm d-flex justify-content-center align-items-center border text-center text-light fw-bold border-dark"
-            style="background-color: #34346D">Професия</div>
-        <div class="col-sm d-flex justify-content-center align-items-center border text-center text-light fw-bold border-dark"
-            style="background-color: #34346D">Пол</div>
-        <div class="col-sm d-flex justify-content-center align-items-center border text-center text-light fw-bold border-dark"
-            style="background-color: #34346D">Дата на раждане</div>
-        <div class="col-sm"></div>
-        <div class="col-sm"></div>
-    </div>
-    <div class="row" *ngFor="let user of users">
-        <div class="col-sm d-flex justify-content-center align-items-center border text-center border-dark">{{
-            user.firstName }}</div>
-        <div class="col-sm d-flex justify-content-center align-items-center border text-center border-dark">{{
-            user.lastName }}</div>
-        <div class="col-sm d-flex justify-content-center align-items-center border text-center border-dark">{{
-            user.occupation }}</div>
-        <div class="col-sm d-flex justify-content-center align-items-center border text-center border-dark">{{
-            user.gender }}</div>
-        <div class="col-sm d-flex justify-content-center align-items-center border text-center border-dark">{{
-            formatDate(user.birthDate) }} ({{ calculateYears(user.birthDate) }} години)</div>
-        <div class="col-sm d-flex justify-content-center align-items-center text-center">
-            <button class="btn btn-secondary" [routerLink]="['/edit-user', user.id]">Редактиране</button>
+@if (show) {
+<ngb-toast class="position-fixed top-0 end-0" role="alert" [autohide]="false" (hidden)="show = false"
+    style="color: #ED0000">
+    <ng-template ngbToastHeader>
+        <div class="me-auto" style="color: #D10000">
+            <strong class="mx-1">Затворете от тук →</strong><small
+                [ngStyle]="{ 'margin-left': mins === 0 ?  '100px' : '60px', 'font-style': 'italic' }">{{ mins === 0 ?
+                'току-що' : 'преди ' + mins }} {{ mins === 0 ? '' : mins === 1 ? 'минута' : 'минути' }}</small>
         </div>
-        <div class="col-sm d-flex justify-content-center align-items-center text-center=">
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePrompt" (click)="deleteUser(user.id)"  >Изтриване</button>
+    </ng-template>
+    <i class="bi bi-exclamation-triangle"></i> Не можете да изтриете този потребител!
+</ngb-toast>
+}
+
+<div class="container mx-auto" id="home-page-id">
+    <h3 class="mb-4 mt-3" style="font-weight: 600">{{ PageHeader ? PageHeader : 'Списък с добавени потребители' }}</h3>
+    <ngb-pagination [pageSize]="pageSize" [collectionSize]="users.length" [(page)]="page" [boundaryLinks]="true" class="bg-danger" />
+    <div class="homepage-table">
+        <div class="row border-top border-bottom border-dark">
+            <div class="col-sm d-flex justify-content-center align-items-center text-center text-light fw-bold "
+                style="background-color: #34346D">Снимка на профила</div>
+            <div class="col-sm d-flex justify-content-center align-items-center text-center text-light fw-bold "
+                style="background-color: #34346D">Първо име</div>
+            <div class="col-sm d-flex justify-content-center align-items-center  text-center text-light fw-bold "
+                style="background-color: #34346D">Фамилия</div>
+            <div class="col-sm d-flex justify-content-center align-items-center  text-center text-light fw-bold"
+                style="background-color: #34346D">Професия</div>
+            <div class="col-sm d-flex justify-content-center align-items-center   text-center text-light fw-bold"
+                style="background-color: #34346D">Пол</div>
+            <div class="col-sm d-flex justify-content-center align-items-center   text-center text-light fw-bold"
+                style="background-color: #34346D">Дата на раждане</div>
+            <div class="col-sm-3 d-flex justify-content-center align-items-center   text-center text-light fw-bold"
+                style="background-color: #34346D">Действия</div>
+    
         </div>
-        {{ user.id }}
+        @for (user of users | slice: (page-1) * pageSize : page * pageSize; track user) {
+        <div class="row border-top border-bottom border-dark-subtle">
+            <div class="col-sm d-flex justify-content-center align-items-center text-center"><img
+                    [src]="user.profilePicture ? user.profilePicture : '../../assets/image-placeholder.jpg'" width="45"
+                    style="border-radius: 5px"></div>
+            <div class="col-sm d-flex justify-content-center align-items-center text-center">{{
+                user.firstName }}</div>
+            <div class="col-sm d-flex justify-content-center align-items-center text-center">{{
+                user.lastName }}</div>
+            <div class="col-sm d-flex justify-content-center align-items-center text-center">{{
+                user.occupation }}</div>
+            <div class="col-sm d-flex justify-content-center align-items-center text-center">{{
+                user.gender }}</div>
+            <div class="col-sm d-flex justify-content-center align-items-center text-center">{{
+                formatDate(user.birthDate) }} ({{ calculateYears(user.birthDate) }} години)</div>
+            <div class="col-sm d-flex justify-content-center align-items-center text-center">
+                <button class="btn btn-secondary" [routerLink]="['/edit-user', user.id]">Редактиране</button>
+            </div>
+            <div class="col-sm d-flex justify-content-center align-items-center text-center">
+                <button type="button" class="btn btn-danger" (click)="deleteUser(user.id)">Изтриване</button>
+            </div>
+        </div>
+        }
     </div>
+</div>

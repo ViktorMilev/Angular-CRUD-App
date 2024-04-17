@@ -12,8 +12,8 @@
 </ngb-toast>
 }
 
-<div class="container mx-auto" id="add-page-id">
-    <h3 class="mb-4 mt-3" style="font-weight: 600">Добавяне на потребител</h3>
+<div class="container mx-auto" id="edit-page-id">
+    <h3 class="mb-4 mt-3" style="font-weight: 600">Редактиране на потребител - {{ user.firstName }}</h3>
     <form #usersForm="ngForm" (ngSubmit)="addUser(user)">
         <div class="form-group row">
             <label for="firstName" class="col-sm-2 col-form-label">Първо име:</label>
@@ -34,7 +34,8 @@
                     required="true" />
             </div>
             <div class="col-sm-5 text-danger d-flex align-items-center" *ngIf="lastName.errors">{{
-                lastName.errors['pattern'] ? invalidFieldMessage(lastName) : !user.lastName ? alertError() : null }}</div>
+                lastName.errors['pattern'] ? invalidFieldMessage(lastName) : !user.lastName ? alertError() : null }}
+            </div>
         </div>
         <div class="form-group row">
             <label for="occupation" class="col-sm-2 col-form-label">Професия:</label>
@@ -44,8 +45,8 @@
                     required="true" />
             </div>
             <div class="col-sm-5 text-danger d-flex align-items-center" *ngIf="occupation.errors">{{
-                occupation.errors['pattern'] ? invalidFieldMessage(occupation) : !user.occupation ? alertError() : null }}
-            </div>
+                occupation.errors['pattern'] ? invalidFieldMessage(occupation) : !user.occupation ? alertError() : null
+                }}</div>
         </div>
         <div class="form-group row">
             <label for="gender" class="col-sm-2 col-form-label">Пол:</label>
@@ -65,11 +66,11 @@
         <div class="form-group row">
             <label for="birthDate" class="col-sm-2 col-form-label">Дата на раждане:</label>
             <div class="col-sm-5">
-                <input #birthDate="ngModel" name="birthDate" type="text" class="form-control" style="cursor: pointer;"
-                    [(ngModel)]="user.birthDate" placeholder="Моля изберете дата на раждане" onfocus="(this.type = 'date')"
-                    required="true" />
+                <input #birthDate="ngModel" name="birthDate" type="date" class="form-control" style="cursor: pointer;"
+                    [(ngModel)]="user.birthDate" placeholder="Моля изберете дата на раждане" required="true" />
             </div>
-            <div class="col-sm-5 text-danger d-flex align-items-center" *ngIf="birthDate.errors">{{ alertError() }}</div>
+            <div class="col-sm-5 text-danger d-flex align-items-center" *ngIf="birthDate.errors">{{ alertError() }}
+            </div>
         </div>
         <div class="form-group row" style="margin-top: 10px; margin-bottom: 10px">
             <div class="col-sm-3 d-flex justify-content-start align-items-center">

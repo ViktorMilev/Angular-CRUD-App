@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http"; 
 import { Injectable } from "@angular/core";
-//import { error } from "console";
-import { Observable, of } from "rxjs";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: "root"
@@ -30,7 +29,7 @@ export class UserService {
 
     // Модифициране на данни на потребител
     editItem(id: number, updatedItem: any): Observable<any> {
-        return this.http.put(`${this.getUrl}?id=${id}`, updatedItem);
+        return this.http.put(`${this.getUrl}/${id}`, updatedItem);
     }
 
     // Изтриване на потребител

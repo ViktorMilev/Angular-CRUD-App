@@ -31,6 +31,7 @@
             ],
             "styles": [
               "src/styles.scss",
+              "src/responsive-design.scss",
               "node_modules/bootstrap/scss/bootstrap.scss",
               "node_modules/bootstrap-icons/font/bootstrap-icons.scss",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css"
